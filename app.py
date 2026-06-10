@@ -58,7 +58,7 @@ poster_imgs = pd.DataFrame(poster_url)
 movies_dict = pickle.load(open("movies_dict.pkl", "rb"))
 movies = pd.DataFrame(movies_dict)
 
-similarity = pickle.load(open("similarity.pkl", "rb"))
+
 
 vectors = pickle.load(open("vectors.pkl", "rb"))
 
