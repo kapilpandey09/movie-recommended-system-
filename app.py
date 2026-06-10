@@ -60,6 +60,10 @@ movies = pd.DataFrame(movies_dict)
 
 similarity = pickle.load(open("similarity.pkl", "rb"))
 
+vectors = pickle.load(open("vectors.pkl", "rb"))
+
+from sklearn.metrics.pairwise import cosine_similarity
+
 
 def recommend(movie):
 
@@ -67,12 +71,15 @@ def recommend(movie):
 
     movie_index = movie_data.index[0]
 
-    distances = similarity[movie_index]
+    distances = cosine_similarity(
+        vectors[movie_index],
+        vectors
+    ).flatten()
 
     movies_list = sorted(
-        list(enumerate(distances)),
-        reverse=True,
-        key=lambda x: x[1]
+        enumerate(distances),
+        key=lambda x: x[1],
+        reverse=True
     )[1:6]
 
     recommended_movies = []
